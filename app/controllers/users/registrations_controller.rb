@@ -10,9 +10,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    if params[:sns_auth] == 'true'
+      pass = Devise.friendly_token
+      params[:user][:password] = pass
+      params[:user][:password_confirmation] = pass
+    end
+    super #rubyでは継承先のクラスでsuperメソッドを使うことで親モデルの同名メソッドをそのまま実行します。ここではdevise本来のregistrations#createアクションが実行されるということです。今回の親モデルは、Userモデルに紐付いているdeviseになります。params[:sns_auth]を取得した時だけDevise.friendly_tokenを使ってパスワードを自動生成し、あとの処理はsuperメソッドでdeviseのregistrations#createを実行させて完成です。
+  end
 
   # GET /resource/edit
   # def edit
