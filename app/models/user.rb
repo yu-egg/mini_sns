@@ -18,7 +18,7 @@ class User < ApplicationRecord
       sns.user = user
       sns.save
     end
-    user
+    { user: user, sns: sns } #SNS認証を行ったかの判断をするために、snsに入っているsns_idをビューで扱えるようにするため、コントローラーに渡します。SnsCredentialモデルにoptional: trueを付与したので、sns = SnsCredential.where(provider: auth.provider, uid: auth.uid).first_or_createの行で、外部キーがないレコードが保存されています。
   end
 end
 #first_or_createとfirst_or_initializeの違いは以下になります。
