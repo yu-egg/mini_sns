@@ -58,3 +58,4 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 # 「omniauth」とは、Google、Facebook、twitter等のSNSアカウントを用いてユーザー登録やログインなどを実装できるgemです。
+gem 'pry-rails'
